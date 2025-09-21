@@ -1,103 +1,277 @@
+"use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+const fadeUp = (delay = 0) => ({
+   hidden: { opacity: 0, y: 24 },
+   show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut", delay },
+   },
+});
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+   const gallery: Array<
+      | { type: "image"; src: string; alt: string }
+      | { type: "text"; content: string }
+   > = [
+      { type: "image", src: "/images/img1.png", alt: "Gallery image 1" },
+      {
+         type: "text",
+         content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
+      },
+      { type: "image", src: "/images/img2.jpeg", alt: "Gallery image 2" },
+      {
+         type: "text",
+         content:
+            "Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.",
+      },
+      { type: "image", src: "/images/img3.jpeg", alt: "Gallery image 3" },
+      {
+         type: "text",
+         content:
+            "Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.",
+      },
+      { type: "image", src: "/images/img4.jpeg", alt: "Gallery image 4" },
+      {
+         type: "text",
+         content:
+            "Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora.",
+      },
+   ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+   return (
+      <div className="relative">
+         {/* Hero Section */}
+         <section id="hero" className="container mx-auto px-6 py-24 max-w-6xl">
+            <h2 className="text-xs uppercase tracking-wide mb-6 font-medium text-foreground/60">
+               This is the Hero section
+            </h2>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+               <div className="space-y-6">
+                  <motion.h1
+                     variants={fadeUp(0)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="text-4xl md:text-5xl font-semibold leading-tight"
+                  >
+                     This is a Heading
+                  </motion.h1>
+                  <motion.p
+                     variants={fadeUp(0.1)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="text-lg text-foreground/70 max-w-prose"
+                  >
+                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                     Integer nec odio. Praesent libero. Sed cursus ante dapibus
+                     diam.
+                  </motion.p>
+                  <motion.div
+                     variants={fadeUp(0.2)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                  >
+                     <Link
+                        href="#testimonials"
+                        className="hover:cursor-pointer inline-block rounded-md bg-foreground text-background dark:bg-white dark:text-black text-sm px-6 py-2 font-semibold shadow hover:bg-foreground/80 dark:hover:bg-white/80 transition-colors duration-200"
+                        type="button"
+                     >
+                        This is a Call To Action
+                     </Link>
+                  </motion.div>
+               </div>
+               <motion.div
+                  variants={fadeUp(0.15)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="group relative aspect-[4/3] rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10"
+               >
+                  <Image
+                     src="/images/img1.png"
+                     alt="Hero image"
+                     fill
+                     priority
+                     className="object-cover transition-transform duration-500 ease-out will-change-transform group-hover:scale-110"
+                  />
+               </motion.div>
+            </div>
+         </section>
+
+         {/* Testimonials Section */}
+         <section
+            id="testimonials"
+            className="container mx-auto px-6 py-24 max-w-6xl"
+         >
+            <h2 className="text-xs uppercase tracking-wide mb-12 font-medium text-foreground/60">
+               This is the Testimonial section
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+               {[
+                  { src: "/images/testimonials/img1.jpeg", alt: "Person 1" },
+                  { src: "/images/testimonials/img2.jpeg", alt: "Person 2" },
+                  { src: "/images/testimonials/img3.jpeg", alt: "Person 3" },
+               ].map((person, idx) => (
+                  <motion.div
+                     key={person.src}
+                     variants={fadeUp((idx + 1) * 0.1)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="rounded-xl border border-black/10 dark:border-white/10 p-6 flex flex-col gap-4 bg-background/50 backdrop-blur"
+                  >
+                     <div className="flex items-center gap-4">
+                        <div className="relative h-12 w-12 rounded-full overflow-hidden ring-1 ring-black/10 dark:ring-white/10">
+                           <Image
+                              src={person.src}
+                              alt={person.alt}
+                              fill
+                              className="object-cover transition-transform duration-500 ease-out will-change-transform hover:scale-110"
+                           />
+                        </div>
+                        <div className="text-sm font-medium">
+                           This is a Name
+                        </div>
+                     </div>
+                     <p className="text-sm leading-relaxed text-foreground/70">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Aenean commodo ligula eget dolor. Aenean massa.
+                     </p>
+                  </motion.div>
+               ))}
+            </div>
+         </section>
+
+         {/* Gallery Section */}
+         <section
+            id="gallery"
+            className="container mx-auto px-6 py-24 max-w-6xl"
+         >
+            <h2 className="text-xs uppercase tracking-wide mb-12 font-medium text-foreground/60">
+               This is the Gallery section
+            </h2>
+            <div className="space-y-16">
+               {/* Row 1: Photo - Text */}
+               <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <motion.div
+                     variants={fadeUp(0)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="group relative aspect-[4/3] rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10"
+                  >
+                     <Image
+                        src="/images/gallery/img1.png"
+                        alt="Gallery image 1"
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out will-change-transform group-hover:scale-110"
+                     />
+                  </motion.div>
+                  <motion.div
+                     variants={fadeUp(0.05)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="flex items-center"
+                  >
+                     <p className="text-base font-medium">
+                        This is a Gallery Text
+                     </p>
+                  </motion.div>
+               </div>
+               {/* Row 2: Text - Photo */}
+               <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <motion.div
+                     variants={fadeUp(0.1)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="flex items-center order-1 md:order-1"
+                  >
+                     <p className="text-base font-medium">
+                        This is a Gallery Text
+                     </p>
+                  </motion.div>
+                  <motion.div
+                     variants={fadeUp(0.15)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="group relative aspect-[4/3] rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 order-2 md:order-2"
+                  >
+                     <Image
+                        src="/images/gallery/img2.jpeg"
+                        alt="Gallery image 2"
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out will-change-transform group-hover:scale-110"
+                     />
+                  </motion.div>
+               </div>
+               {/* Row 3: Photo - Text */}
+               <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <motion.div
+                     variants={fadeUp(0.2)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="group relative aspect-[4/3] rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10"
+                  >
+                     <Image
+                        src="/images/gallery/img3.jpeg"
+                        alt="Gallery image 3"
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out will-change-transform group-hover:scale-110"
+                     />
+                  </motion.div>
+                  <motion.div
+                     variants={fadeUp(0.25)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="flex items-center"
+                  >
+                     <p className="text-base font-medium">
+                        This is a Gallery Text
+                     </p>
+                  </motion.div>
+               </div>
+               {/* Row 4: Text - Photo */}
+               <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <motion.div
+                     variants={fadeUp(0.3)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="flex items-center order-1 md:order-1"
+                  >
+                     <p className="text-base font-medium">
+                        This is a Gallery Text
+                     </p>
+                  </motion.div>
+                  <motion.div
+                     variants={fadeUp(0.35)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true }}
+                     className="group relative aspect-[4/3] rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 order-2 md:order-2"
+                  >
+                     <Image
+                        src="/images/gallery/img4.jpeg"
+                        alt="Gallery image 4"
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out will-change-transform group-hover:scale-110"
+                     />
+                  </motion.div>
+               </div>
+            </div>
+         </section>
+      </div>
+   );
 }
