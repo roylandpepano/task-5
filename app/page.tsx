@@ -95,7 +95,7 @@ export default function Home() {
                   className="group relative aspect-[4/3] rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10"
                >
                   <Image
-                     src="/images/testimonials/img1.jpeg"
+                     src="/images/img.png"
                      alt="Hero image"
                      fill
                      priority
